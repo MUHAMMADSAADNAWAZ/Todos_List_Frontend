@@ -1,0 +1,6 @@
+export const ROUTE_HOME = "/home"
+export const ROUTE_LOGIN = "/"
+export const ROUTE_SIGNUP = "/signup"
+export const ROUTE_ADD_TODO = "/add"
+export const ROUTE_EDIT_TODO = "/edit/:todoId"
+export const ROUTE_ERROR_PAGE = "*"
