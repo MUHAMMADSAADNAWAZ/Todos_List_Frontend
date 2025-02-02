@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ThemeContext/Theme";
 import { LoginSchema } from "../../schemas/Login";
-import axios from "../../api/axios"
+import axios, { setAuthToken } from "../../api/axios"
 import { useMutation } from "@tanstack/react-query";
 import { ROUTE_HOME, ROUTE_SIGNUP } from "../../constants";
 import { toast } from "react-toastify";
@@ -11,12 +11,12 @@ import { toast } from "react-toastify";
 const Login = () => {
 
   const navigate = useNavigate();
-  const { setUserid , setName , theme } = useContext(ThemeContext);
+  const { setUserid , setName , theme , setToken } = useContext(ThemeContext);
 
 
   const LoginUser = async (LoginData) =>{
     try{
-      const response = await axios.post("users/login" , LoginData);
+      const response = await axios.post("users/login/" , LoginData);
       return response.data;
     }
     catch(error){
@@ -35,6 +35,8 @@ const Login = () => {
       else{
         setUserid(response?.user?._id);
         setName(response?.user?.username);
+        setToken(response?.token); // Save the token in the context
+        setAuthToken(response?.token)
         // console.log("Successfully Logged in" , response);
         toast.success("Successfully Logged in")
         navigate(ROUTE_HOME);

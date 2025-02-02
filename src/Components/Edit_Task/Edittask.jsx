@@ -16,7 +16,7 @@ const Edittask = () => {
 
   const fetchTodo = async () =>{
     try{
-      const response = await axios.get(`todos/${todoId}`);
+      const response = await axios.get(`todos/${todoId}/`);
       return response.data;
       
     }
@@ -33,7 +33,7 @@ const Edittask = () => {
 
   const updateTodo = async (updatedToto) => {
     try{
-      const response = await axios.put(`todos/${todoId}` , updatedToto)
+      const response = await axios.put(`todos/${todoId}/` , updatedToto)
       return response.data
     }
     catch(error){
@@ -62,7 +62,7 @@ const Edittask = () => {
 
   const {values , errors , touched , handleBlur , handleChange , handleSubmit , resetForm } = useFormik({
     initialValues: {
-      name: data ? data?.name : '', 
+      title: data ? data?.title : '', 
       description: data ? data?.description : '', 
     },
     validationSchema : todoSchema,
@@ -87,8 +87,8 @@ const Edittask = () => {
     <div className={` min-h-screen h-auto ${theme === "default" ? "bg-[#233a77]" : "bg-black"}`}>
     <h2 className='text-white text-center p-4 text-2xl'>Edit Todo Task</h2>
         <form className='flex flex-col justify-center items-center' onSubmit={handleSubmit}>
-            <input ref={titleRef} name='name' type="text" placeholder='Enter todo title' className='w-[400px] p-5 my-5 border-0 outline-0 break-all' value={values.name} onChange={handleChange} onBlur={handleBlur}/>
-            {(errors.name && touched.name) ? <p className='form-error text-red-500 pb-2'>{errors.name}</p> : null}
+            <input ref={titleRef} name='title' type="text" placeholder='Enter todo title' className='w-[400px] p-5 my-5 border-0 outline-0 break-all' value={values.title} onChange={handleChange} onBlur={handleBlur}/>
+            {(errors.title && touched.title) ? <p className='form-error text-red-500 pb-2'>{errors.title}</p> : null}
             <textarea name='description' placeholder='Enter todo Details' rows='8' cols='47' className='p-5 mb-5 border-0 outline-0 break-all' value={values.description} onChange={handleChange} onBlur={handleBlur}></textarea>
             {(errors.description && touched.description) ? <p className='form-enter text-red-500 pb-2'>{errors.description}</p> : null}
             <div className='flex gap-5'>

@@ -17,7 +17,7 @@ const Home = () => {
 
     const fetchTodos = async () =>{
         try{
-            const response = await axios.get('todos' , {
+            const response = await axios.get('todos/' , {
               params: {userid: userid}
             });
             return response.data
@@ -34,7 +34,7 @@ const Home = () => {
   })
 
   const deleteTodo = async (id) =>{
-    const response = await axios.delete(`todos/${id}`)
+    const response = await axios.delete(`todos/${id}/`)
     return response.data;
   }
 
@@ -63,12 +63,12 @@ const Home = () => {
             {data?.length === 0 || !data ? <h2 className='text-white font-semibold text-center text-lg'>No Todos Available</h2> : data?.map((todo)=>{
                 return(<div key={todo._id} className="boxes bg-white w-full p-5 rounded-lg flex justify-between mb-4">
                 <div className="left flex flex-col gap-2 w-[95%]">
-                    <p className='text-sm font-semibold text-[#9395D3]'>{todo.name}</p>
+                    <p className='text-sm font-semibold text-[#9395D3]'>{todo?.title}</p>
                     <p className='text-sm text-black'>{todo.description}</p>
                 </div>
                 <div className="right flex gap-5 py-3">
-                    <img src={edit} alt="edit"  className='w-5 h-5 cursor-pointer' onClick={() => {navigate(`/edit/${todo._id}`)}}/>
-                    <img src={delete_icon} alt="delete" className='w-5 h-5 cursor-pointer' onClick={() => {mutateAsync(todo._id)}} />
+                    <img src={edit} alt="edit"  className='w-5 h-5 cursor-pointer' onClick={() => {navigate(`/edit/${todo.id}`)}}/>
+                    <img src={delete_icon} alt="delete" className='w-5 h-5 cursor-pointer' onClick={() => {mutateAsync(todo.id)}} />
                 </div>
             </div>)
             })}

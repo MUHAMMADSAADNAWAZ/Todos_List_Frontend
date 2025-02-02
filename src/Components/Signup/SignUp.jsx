@@ -12,7 +12,8 @@ const SignUp = () => {
 
   const newUser = async (userData) =>{
     try{
-      const response = await axios.post("users/signup" , userData);
+      // const response = await axios.post("users/signup/" , userData); // for nest application
+      const response = await axios.post("users/" , userData); // for django application
       return response.data;
     }
     catch(error){
